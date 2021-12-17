@@ -1,0 +1,3 @@
+C:/Users/sidra/CLionProjects/FinalProjectEnemies/cmake-build-debug/CMakeFiles/FinalProjectEnemies.dir
+C:/Users/sidra/CLionProjects/FinalProjectEnemies/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/sidra/CLionProjects/FinalProjectEnemies/cmake-build-debug/CMakeFiles/rebuild_cache.dir
