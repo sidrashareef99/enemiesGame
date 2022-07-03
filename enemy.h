@@ -10,23 +10,26 @@ class Enemy{
 private:
     int x_position;
     int y_position;
+    string name;
     double width;
     double height;
-    string status;
+    int status;
 public:
     //Setters
     void setX_position(int x_position);
     void setY_position(int y_position);
+    void setName(string name);
     void setWidth(double width);
     void setHeight(double height);
-    void setStatus(string status);
+    void setStatus(int status);
 
     //Getters
     int getX_position();
     int getY_position();
+    string getName();
     double getWidth();
     double getHeight();
-    string getStatus();
+    int getStatus();
 
     //Methods
     virtual void move_position()=0;

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-static string enemyName;
+
 static string enemyWeapon;
 static int enemyAmmo;
 
@@ -13,6 +13,19 @@ Type2::Type2(string name,string weapon,int ammo) {
     setName(name);
     setWeapon(weapon);
     setAmmo(ammo);
+
+    int enemyStatus;
+    int r;
+    r = rand() % 2;
+
+    if (r == 0){
+        enemyStatus = 4;
+    }
+    else {
+        enemyStatus=5;
+    }
+
+    setStatus(enemyStatus);
 
     if (name=="Jet"||name=="Helicopter"){
         setY_position(100);
@@ -26,12 +39,6 @@ Type2::Type2(string name,string weapon,int ammo) {
 
 }
 
-void Type2::setName(string name) {
-    enemyName = name;
-}
-string Type2::getName() {
-    return enemyName;
-}
 void Type2::setWeapon(string weapon) {
     enemyWeapon = weapon;
 }
@@ -52,7 +59,7 @@ void Type2::move_position() {
     int low = 15;
     int high = 30;
     int move = rand() % ( high - low + 1 ) + low;
-    if(getStatus() != "DEAD"){
+    if(getStatus() != 0){
         //get direction  0 = left 1 = right
         int direction = rand() % 2;
         //can move in x direction by 3 spaces
@@ -65,12 +72,12 @@ void Type2::move_position() {
 
         if(direction == 1){
             setX_position(positionX + move);
-            cout << "The " << enemyName  << " moved "<< move<<"  spaces to the right (" << getX_position() << "," << getY_position() <<")  " ;
+            cout << "The " << getName()  << " moved "<< move<<"  spaces to the right (" << getX_position() << "," << getY_position() <<")  " ;
         }
         else{
 
             setX_position(positionX - move);
-            cout << "The " << enemyName  << " moved "<< move<< " spaces to the left (" << getX_position() << "," << getY_position() <<")  ";
+            cout << "The " << getName()  << " moved "<< move<< " spaces to the left (" << getX_position() << "," << getY_position() <<")  ";
 
 
         }
@@ -87,12 +94,25 @@ void Type2::fire_weapon(){
     else{
         int remainingAmmo = ammo-1;
         setAmmo(remainingAmmo);
-        cout<<enemyName<<" fire weapon: "<<getWeapon()<<"("<<remainingAmmo<<" left)";
+        cout<<getName()<<" fire weapon: "<<getWeapon()<<"("<<remainingAmmo<<" left)";
     }
 
 
 
 }
 void Type2::update_status(){
-    cout<<"type two enemy status: hit by missile, status points 3";
+    int stat = getStatus();
+    if (stat==0){
+        cout<<getName()<<" DEAD!";
+    }
+    else if (stat==1){
+        int newStatus = stat-1;
+        setStatus(newStatus);
+        cout<<getName()<<" update status: ARGHH"<<" status points: "<<newStatus;
+    }
+    else{
+        int newStatus = stat-1;
+        setStatus(newStatus);
+        cout<<getName()<<" update status: HIT!"<<" status points: "<<newStatus;
+    }
 }

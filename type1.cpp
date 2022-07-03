@@ -4,7 +4,6 @@
 
 using namespace std;
 
-static string enemyName;
 static string enemyWeapon;
 static int enemyAmmo;
 
@@ -14,6 +13,8 @@ static int enemyAmmo;
     setWeapon(weapon);
     setAmmo(ammo);
 
+    setStatus(rand() % 2 + 1);
+
     // set x position to random int from 0 to 800
     setX_position(rand() % 801);
 
@@ -21,12 +22,6 @@ static int enemyAmmo;
     setY_position(500);
 }
 
-void Type1::setName(string name) {
-    enemyName = name;
-}
-string Type1::getName() {
-    return enemyName;
-}
 void Type1::setWeapon(string weapon) {
     enemyWeapon = weapon;
 }
@@ -44,7 +39,7 @@ void Type1::move_position() {
 
          //get current x position
     int positionX = getX_position();
-    if(getStatus() != "DEAD"){
+    if(getStatus() != 0){
         //get direction  0 = left 1 = right
          int direction = rand() % 2;
         //can move in x direction by 3 spaces
@@ -54,16 +49,15 @@ void Type1::move_position() {
         if(positionX <= 2){
              direction = 1;
          }
-        cout<<enemyName;
 
          if(direction == 1){
              setX_position(positionX + 3);
-             cout << "The " << enemyName  << " moved 3 spaces to the right (" << getX_position() << "," << getY_position() <<")  " ;
+             cout << "The " << getName()  << " moved 3 spaces to the right (" << getX_position() << "," << getY_position() <<")  " ;
          }
          else{
 
              setX_position(positionX - 3);
-             cout << "The " << enemyName  << " moved 3 spaces to the left(" << getX_position() << "," << getY_position() <<")  " ;
+             cout << "The " << getName()  << " moved 3 spaces to the left(" << getX_position() << "," << getY_position() <<")  " ;
 
 
          }
@@ -81,19 +75,32 @@ void Type1::fire_weapon() {
     int attack = rand() % 3;
 
     if(attack == 0){
-        cout<<enemyName<<" fire weapon: slash neck";
+        cout<<getName()<<" fire weapon: slash neck";
     }
     else if(attack == 1){
-        cout<<enemyName<<" fire weapon: bite leg ";
+        cout<<getName()<<" fire weapon: bite leg ";
     }
     else if(attack == 2){
-        cout<<enemyName<<" fire weapon: bite chest ";
+        cout<<getName()<<" fire weapon: bite chest ";
     }
 
 
 }
 
 void Type1::update_status() {
-    cout << "type one enemy status: hit by rifle, status points 2";
+    int stat = getStatus();
+    if (stat==0){
+        cout<<getName()<<" DEAD!";
+    }
+    else if (stat==1){
+        int newStatus = stat-1;
+        setStatus(newStatus);
+        cout<<getName()<<" update status: ARGHH"<<" status points: "<<newStatus;
+    }
+    else{
+        int newStatus = stat-1;
+        setStatus(newStatus);
+        cout<<getName()<<" update status: HIT!"<<" status points: "<<newStatus;
+    }
 }
 
